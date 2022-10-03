@@ -9,7 +9,7 @@ param imageName string = ''
 param keyVaultName string = ''
 param serviceName string = 'web'
 
-var abbrs = loadJsonContent('../../../../../common/infra/bicep/abbreviations.json')
+var abbrs = loadJsonContent('../abbreviations.json')
 var resourceToken = toLower(uniqueString(subscription().id, environmentName, location))
 
 module web '../core/host/container-app.bicep' = {
