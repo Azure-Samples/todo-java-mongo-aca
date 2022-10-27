@@ -18,8 +18,8 @@ module api '../core/host/container-app.bicep' = {
     location: location
     containerAppsEnvironmentName: containerAppsEnvironmentName
     containerRegistryName: containerRegistryName
-    containerCpuCoreCount: '1.0'
-    containerMemory: '2.0Gi'
+    containerCpuCoreCount: '2.0'
+    containerMemory: '4.0Gi'
     env: [
       {
         name: 'AZURE_KEY_VAULT_ENDPOINT'

@@ -12,10 +12,10 @@ param targetPort int = 80
 param serviceName string
 
 @description('CPU cores allocated to a single container instance, e.g. 0.5')
-param containerCpuCoreCount string = '0.5'
+param containerCpuCoreCount string = '2'
 
 @description('Memory allocated to a single container instance, e.g. 1Gi')
-param containerMemory string = '1.0Gi'
+param containerMemory string = '4.0Gi'
 
 var abbrs = loadJsonContent('../../abbreviations.json')
 var resourceToken = toLower(uniqueString(subscription().id, environmentName, location))
