@@ -13,10 +13,10 @@ param managedIdentity bool = !empty(keyVaultName)
 param targetPort int = 80
 
 @description('CPU cores allocated to a single container instance, e.g. 0.5')
-param containerCpuCoreCount string = '0.5'
+param containerCpuCoreCount string = '2'
 
 @description('Memory allocated to a single container instance, e.g. 1Gi')
-param containerMemory string = '1.0Gi'
+param containerMemory string = '4.0Gi'
 
 resource app 'Microsoft.App/containerApps@2022-03-01' = {
   name: name
