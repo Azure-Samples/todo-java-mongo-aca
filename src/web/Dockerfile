@@ -17,4 +17,4 @@ COPY --from=build /app/nginx/nginx.conf /etc/nginx/conf.d/default.conf
 
 EXPOSE 80
 
-CMD ["/bin/sh", "-c", "nginx -g \"daemon off;\""]
+CMD ["/bin/sh", "-c", "sed -i \"s|http://localhost:3100|${API_BASE_URL}|g\" -i ./**/*.js && nginx -g \"daemon off;\""]

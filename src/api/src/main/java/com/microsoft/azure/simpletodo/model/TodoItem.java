@@ -2,12 +2,16 @@ package com.microsoft.azure.simpletodo.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
-import java.time.OffsetDateTime;
-import java.util.Objects;
 import jakarta.annotation.Generated;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
+import org.hibernate.annotations.UuidGenerator;
 import org.springframework.format.annotation.DateTimeFormat;
+
+import java.time.OffsetDateTime;
+import java.util.Objects;
 
 /**
  * A task that needs to be completed
@@ -15,9 +19,12 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 @Schema(name = "TodoItem", description = "A task that needs to be completed")
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen")
+@Entity
 public class TodoItem {
 
     @JsonProperty("id")
+    @Id
+    @UuidGenerator
     private String id;
 
     @JsonProperty("listId")

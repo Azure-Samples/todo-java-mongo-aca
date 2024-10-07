@@ -11,15 +11,16 @@ import com.microsoft.azure.simpletodo.model.TodoList;
 import com.microsoft.azure.simpletodo.model.TodoState;
 import com.microsoft.azure.simpletodo.repository.TodoItemRepository;
 import com.microsoft.azure.simpletodo.repository.TodoListRepository;
+import org.springframework.http.ResponseEntity;
+import org.springframework.util.CollectionUtils;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
 import java.math.BigDecimal;
 import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.StreamSupport;
-import org.springframework.http.ResponseEntity;
-import org.springframework.util.CollectionUtils;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 @RestController
 public class TodoItemsController implements ItemsApi {
@@ -68,7 +69,7 @@ public class TodoItemsController implements ItemsApi {
         // no need to check nullity of top and skip, because they have default values.
         return todoListRepository
             .findById(listId)
-            .map(l -> todoItemRepository.findTodoItemsByTodoList(l.getId(), skip.intValue(), top.intValue()))
+            .map(l -> todoItemRepository.findTodoItemsByListId(l.getId()))
             .map(ResponseEntity::ok)
             .orElseGet(() -> ResponseEntity.notFound().build());
     }
@@ -94,9 +95,8 @@ public class TodoItemsController implements ItemsApi {
         // no need to check nullity of top and skip, because they have default values.
         return todoListRepository
             .findById(listId)
-            .map(l ->
-                todoItemRepository.findTodoItemsByTodoListAndState(l.getId(), state.name(), skip.intValue(), top.intValue())
-            )
+            // TODO (rujche): Add feature about skip and top.
+            .map(l -> todoItemRepository.findTodoItemsByListIdAndState(l.getId(), state.name()))
             .map(ResponseEntity::ok)
             .orElseGet(() -> ResponseEntity.notFound().build());
     }
@@ -108,13 +108,14 @@ public class TodoItemsController implements ItemsApi {
             .filter(ids -> !CollectionUtils.isEmpty(ids))
             .map(ids ->
                 StreamSupport
-                    .stream(todoItemRepository.findAllById(ids).spliterator(), false)
+                    // TODO (rujche): Add feature about ids.
+                    .stream(todoItemRepository.findTodoItemsById(ids.get(0)).spliterator(), false)
                     .filter(i -> listId.equalsIgnoreCase(i.getListId()))
                     .toList()
             )
             .orElseGet(() -> todoItemRepository.findTodoItemsByListId(listId));
         items.forEach(item -> item.setState(state));
-        todoItemRepository.saveAll(items); // save items in batch.
+        todoItemRepository.save(items); // save items in batch.
         return ResponseEntity.noContent().build();
     }
 }

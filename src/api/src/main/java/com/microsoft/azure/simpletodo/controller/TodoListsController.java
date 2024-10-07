@@ -3,13 +3,15 @@ package com.microsoft.azure.simpletodo.controller;
 import com.microsoft.azure.simpletodo.api.ListsApi;
 import com.microsoft.azure.simpletodo.model.TodoList;
 import com.microsoft.azure.simpletodo.repository.TodoListRepository;
-import java.math.BigDecimal;
-import java.net.URI;
-import java.util.List;
 import jakarta.validation.constraints.NotNull;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import java.math.BigDecimal;
+import java.net.URI;
+import java.util.List;
 
 @RestController
 public class TodoListsController implements ListsApi {
@@ -47,7 +49,8 @@ public class TodoListsController implements ListsApi {
 
     public ResponseEntity<List<TodoList>> getLists(BigDecimal top, BigDecimal skip) {
         // no need to check nullity of top and skip, because they have default values.
-        return ResponseEntity.ok(todoListRepository.findAll(skip.intValue(), top.intValue()));
+        // TODO (rujche): Add feature about skip and top.
+        return ResponseEntity.ok(todoListRepository.findAll(Pageable.ofSize(top.intValue())).stream().toList());
     }
 
     public ResponseEntity<TodoList> updateListById(String listId, @NotNull TodoList todoList) {

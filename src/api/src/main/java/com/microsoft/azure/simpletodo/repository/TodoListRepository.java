@@ -1,13 +1,16 @@
 package com.microsoft.azure.simpletodo.repository;
 
 import com.microsoft.azure.simpletodo.model.TodoList;
-import java.util.List;
-import org.springframework.data.mongodb.repository.Aggregation;
-import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.stereotype.Repository;
 
-public interface TodoListRepository extends MongoRepository<TodoList, String> {
-    @Aggregation(pipeline = { "{ '$skip': ?0 }", "{ '$limit': ?1 }" })
-    List<TodoList> findAll(int skip, int limit);
+import java.util.Optional;
+
+@Repository
+public interface TodoListRepository extends PagingAndSortingRepository<TodoList, String> {
+    Optional<TodoList> findById(final String id);
+
+    TodoList save(final TodoList todoList);
 
     TodoList deleteTodoListById(String id);
 }
