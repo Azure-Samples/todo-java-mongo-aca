@@ -20,6 +20,9 @@ description: A complete ToDo app on Azure Container Apps with Java API and Azure
 ---
 <!-- YAML front-matter schema: https://review.learn.microsoft.com/en-us/help/contribute/samples/process/onboarding?branch=main#supported-metadata-fields-for-readmemd -->
 
+> [!WARNING]
+> This repository is archived and no longer maintained. For more Azure Developer CLI (`azd`) samples, visit [Awesome AZD](https://aka.ms/awesome-azd).
+
 # Containerized React Web App with Java API and MongoDB on Azure
 
 [![Open in GitHub Codespaces](https://img.shields.io/static/v1?style=for-the-badge&label=GitHub+Codespaces&message=Open&color=brightgreen&logo=github)](https://codespaces.new/azure-samples/todo-java-mongo-aca)
