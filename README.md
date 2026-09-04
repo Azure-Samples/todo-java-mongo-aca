@@ -19,6 +19,8 @@ name: Containerized React Web App with Java API and MongoDB on Azure
 description: A complete ToDo app on Azure Container Apps with Java API and Azure DocumentDB (with MongoDB compatibility) for storage. Uses Azure Developer CLI (azd) to build, deploy, and monitor
 ---
 <!-- YAML front-matter schema: https://review.learn.microsoft.com/en-us/help/contribute/samples/process/onboarding?branch=main#supported-metadata-fields-for-readmemd -->
+> [!WARNING]
+> This repository is archived and no longer maintained. For more Azure Developer CLI (`azd`) samples, visit [Awesome AZD](https://aka.ms/awesome-azd)
 
 # Containerized React Web App with Java API and MongoDB on Azure
 
